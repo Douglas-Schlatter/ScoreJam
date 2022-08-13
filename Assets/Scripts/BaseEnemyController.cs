@@ -8,22 +8,38 @@ public class BaseEnemyController : MonoBehaviour
 
     public GameObject deathEffect;
     public float lastHit = 0;
-    public  GameObject a;
-    public Pathfinding.AIDestinationSetter pf;
+    public Pathfinding.AIPath pf;
+    public Pathfinding.AIDestinationSetter ds;
 
 
 
     private void Awake()
     {
-        pf = a.GetComponentInChildren<Pathfinding.AIDestinationSetter>();
-        pf.target = GameController.iCont.player.transform;
+        ds.target = GameController.iCont.player.transform;
     }
 
+    private void FixedUpdate()
+    {
+        if (GameController.iCont.timer - lastHit > 0.1)
+        {
+            //pf.canMove = true;
+            // pf.canSearch = false;
+            //ds.StartCoroutine();
+            //ds.target = GameController.iCont.player.transform;
+            pf.enabled = true;
+        }
+    }
     public void TakeDamage(int damage)
     {
   
         lastHit = GameController.iCont.timer;
         health -= damage;
+        //pf.canMove = false;
+
+        //ds.target = null;
+        //pf.canSearch = false;
+        pf.enabled = false;
+
         if (health <= 0)
         {
             Die();

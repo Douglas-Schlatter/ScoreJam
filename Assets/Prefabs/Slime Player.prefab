@@ -14,9 +14,8 @@ GameObject:
   - component: {fileID: 217788455370571805}
   - component: {fileID: 217788455370571804}
   - component: {fileID: 2103830374191505694}
-  - component: {fileID: 988048559346622719}
-  - component: {fileID: 217788455370571777}
   - component: {fileID: 217788455370571782}
+  - component: {fileID: 5566726073903679764}
   m_Layer: 7
   m_Name: Slime Player
   m_TagString: Player
@@ -171,58 +170,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!68 &988048559346622719
-EdgeCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 217788455370571798}
-  m_Enabled: 0
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_EdgeRadius: 0
-  m_Points:
-  - {x: -0.06944148, y: -0.093714595}
-  - {x: -0.08000526, y: -0.05842927}
-  - {x: 0.00022014976, y: 0.09950626}
-  - {x: 0.07905139, y: -0.06291929}
-  - {x: 0.065683976, y: -0.097072095}
-  - {x: -0.07075448, y: -0.09478861}
-  m_AdjacentStartPoint: {x: 0, y: 0}
-  m_AdjacentEndPoint: {x: 0, y: 0}
-  m_UseAdjacentStartPoint: 0
-  m_UseAdjacentEndPoint: 0
---- !u!68 &217788455370571777
-EdgeCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 217788455370571798}
-  m_Enabled: 0
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_EdgeRadius: 0
-  m_Points:
-  - {x: -0.06944148, y: -0.093714595}
-  - {x: -0.08000526, y: -0.05842927}
-  - {x: 0.00022014976, y: 0.09950626}
-  - {x: 0.07905139, y: -0.06291929}
-  - {x: 0.065683976, y: -0.097072095}
-  - {x: -0.07075448, y: -0.09478861}
-  m_AdjacentStartPoint: {x: 0, y: 0}
-  m_AdjacentEndPoint: {x: 0, y: 0}
-  m_UseAdjacentStartPoint: 0
-  m_UseAdjacentEndPoint: 0
 --- !u!58 &217788455370571782
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -234,6 +181,22 @@ CircleCollider2D:
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.4
+--- !u!58 &5566726073903679764
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 217788455370571798}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}

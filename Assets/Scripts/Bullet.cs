@@ -11,7 +11,11 @@ public class Bullet : MonoBehaviour
     void OnTriggerEnter2D(Collider2D col)
     {
         Debug.Log(col.name);
-        
+
+        GameObject effect = Instantiate(hitEffect, transform.position, Quaternion.identity);
+        Destroy(effect, 1f);
+        Destroy(gameObject);
+
         if (col.CompareTag("Enemy"))
         {
             BaseEnemyController enemyCtr = col.GetComponent<BaseEnemyController>();
@@ -20,8 +24,6 @@ public class Bullet : MonoBehaviour
 
         
 
-        GameObject effect = Instantiate(hitEffect, transform.position, Quaternion.identity);
-        Destroy(effect, 1f);
-        Destroy(gameObject);
+
     }
 }

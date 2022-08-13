@@ -904,15 +904,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 217788455370571805, guid: 92d9412970dea7a4a8315d9912d22d3b, type: 3}
       propertyPath: lazer
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 217788455370571805, guid: 92d9412970dea7a4a8315d9912d22d3b, type: 3}
-      propertyPath: bullet
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 217788455370571805, guid: 92d9412970dea7a4a8315d9912d22d3b, type: 3}
+      propertyPath: bullet
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 217788455370571805, guid: 92d9412970dea7a4a8315d9912d22d3b, type: 3}
       propertyPath: bulletForce
-      value: 50
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 92d9412970dea7a4a8315d9912d22d3b, type: 3}

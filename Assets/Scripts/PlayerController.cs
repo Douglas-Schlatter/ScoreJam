@@ -23,7 +23,6 @@ public class PlayerController : MonoBehaviour, IDamageSource
 
     //Status Effects
     public float moveSpeed = 5f;
-    public float life = 3f;
 
     //Time Related
     public float timer = 0.0f;
@@ -104,7 +103,9 @@ public class PlayerController : MonoBehaviour, IDamageSource
         rb.rotation = angle;
         PlayerStt.Next(@event);
     }
-    //AKA Em colisão faça
+
+
+    //AKA Em colisï¿½o faï¿½a
     void OnTriggerEnter2D(Collider2D col)
     {
         Debug.Log(col.name);
@@ -114,7 +115,7 @@ public class PlayerController : MonoBehaviour, IDamageSource
             if (col.CompareTag("Enemy") || col.CompareTag("ABullet") && (timer - lastHitSnap) > 2.0)
         {
                 lastHitSnap = timer;
-                life--;
+                GameController.TakeDamage();;
             }
         }
         else if (@state.HasFlag(MadDashing))
@@ -124,6 +125,7 @@ public class PlayerController : MonoBehaviour, IDamageSource
 
             gameObject.transform.localScale = MunchScale;
             PlayerStt.Next(@event.Union(DoWalk).ExceptFor(DoMadDash));
+            
         }
         //Change the spirte of the player to pulsating red for 2 seconds
     }

@@ -920,6 +920,10 @@ PrefabInstance:
       propertyPath: bulletForce
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 1704563605186203212, guid: 92d9412970dea7a4a8315d9912d22d3b, type: 3}
+      propertyPath: cam
+      value: 
+      objectReference: {fileID: 519420031}
     - target: {fileID: 2103830374191505694, guid: 92d9412970dea7a4a8315d9912d22d3b, type: 3}
       propertyPath: m_LinearDrag
       value: 5

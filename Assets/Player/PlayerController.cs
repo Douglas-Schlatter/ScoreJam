@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 using static Vector;
 using static Func;
 using static State;
@@ -8,6 +9,8 @@ using static Event;
 public class PlayerController : MonoBehaviour, IDamageSource
 {
     float _munch = 1;
+
+    public event Action<int> OnStateChanged;
 
     Vector3 MunchScale
     {
@@ -92,12 +95,18 @@ public class PlayerController : MonoBehaviour, IDamageSource
         }
         if (@state.HasFlag(MadDashing) && !@state.HasFlag(Recharging))
         {
+            OnStateChanged?.Invoke(@state);
             MadDash();
         }
         else if (@state.HasFlag(Walking))
         {
             rb.MovePosition(rb.position + moveSpeed * Time.fixedDeltaTime * movement);
             rb.DropForce();
+            OnStateChanged?.Invoke(state);
+        }
+        else if (@state.HasFlag(Hurt))
+        {
+            OnStateChanged?.Invoke(state);
         }
         float angle = Mathf.Atan2(LookDir.y, LookDir.x) * Mathf.Rad2Deg - 90f;
         rb.rotation = angle;
@@ -109,11 +118,15 @@ public class PlayerController : MonoBehaviour, IDamageSource
         Debug.Log(col.name);
         if (!state.HasFlag(MadDashing))
         {
-
             if (col.CompareTag("Enemy") || col.CompareTag("ABullet") && (timer - lastHitSnap) > 2.0)
-        {
+            {
+                @event = @event.Union(GetHurt);
                 lastHitSnap = timer;
                 life--;
+            }
+            else
+            {
+                @event = @event.ExceptFor(GetHurt);
             }
         }
         else if (@state.HasFlag(MadDashing))

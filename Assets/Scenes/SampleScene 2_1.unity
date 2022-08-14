@@ -920,6 +920,14 @@ PrefabInstance:
       propertyPath: bulletForce
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 1704563605186203212, guid: 92d9412970dea7a4a8315d9912d22d3b, type: 3}
+      propertyPath: cam
+      value: 
+      objectReference: {fileID: 519420031}
+    - target: {fileID: 1704563605186203212, guid: 92d9412970dea7a4a8315d9912d22d3b, type: 3}
+      propertyPath: DashMod
+      value: 500
+      objectReference: {fileID: 0}
     - target: {fileID: 2103830374191505694, guid: 92d9412970dea7a4a8315d9912d22d3b, type: 3}
       propertyPath: m_LinearDrag
       value: 5
@@ -936,6 +944,22 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 217788455370571802, guid: 92d9412970dea7a4a8315d9912d22d3b, type: 3}
   m_PrefabInstance: {fileID: 1309868716}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1309868734
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1309868717}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 972b23a1004153d4c8ad5edb2e86403f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SpriteRenderer: {fileID: 0}
+  BaseSprite: {fileID: 0}
+  HurtSprite: {fileID: -49112028, guid: 1a9d74af8dbb96248a1697feef167956, type: 3}
+  MadDashSprite: {fileID: 1057786908, guid: 5c8fcf625c6cc094bab1b251d81aaea0, type: 3}
 --- !u!1 &1509620277
 GameObject:
   m_ObjectHideFlags: 0

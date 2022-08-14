@@ -77,7 +77,7 @@ public class PlayerState : IStateMachine<int, int, PlayerState>
         };
         result = @event.ExceptFor(moveEvents) switch
         {
-            RechargeDash => result.Union(Recharging),
+            RechargeDash => result.ExceptFor(Recharging, Hurt),
             GetHurt => result.Union(Hurt),
             _ => result,
         };

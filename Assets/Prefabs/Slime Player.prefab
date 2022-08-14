@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 217788455370571802}
   - component: {fileID: 217788455370571803}
-  - component: {fileID: 1704563605186203212}
+  - component: {fileID: 7991418579374025228}
   - component: {fileID: 217788455370571805}
   - component: {fileID: 217788455370571804}
   - component: {fileID: 2103830374191505694}
@@ -92,7 +92,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1704563605186203212
+--- !u!114 &7991418579374025228
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -101,7 +101,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 217788455370571798}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3a7dafab96094664ba60a0a3c25c7e06, type: 3}
+  m_Script: {fileID: 11500000, guid: b4e870b2f20ae9746961ea0cab999d9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
@@ -109,7 +109,7 @@ MonoBehaviour:
   timer: 0
   lastHitSnap: 0
   lastDashSnap: 0
-  rb: {fileID: 2103830374191505694}
+  rb: {fileID: 0}
   cam: {fileID: 0}
   DashDamage: 2
   CurrentEvent: 

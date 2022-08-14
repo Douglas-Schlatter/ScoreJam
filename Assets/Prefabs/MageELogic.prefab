@@ -339,6 +339,7 @@ MonoBehaviour:
   lastHit: 0
   pf: {fileID: 8789976871851691975}
   ds: {fileID: 8699071213522648249}
+  lastShoot: 0
   lazerDmg: 1
   firePoint: {fileID: 8244572733201356972}
   lineRender: {fileID: 3152389619836885579}
@@ -439,7 +440,7 @@ GameObject:
   - component: {fileID: 8110956430603928505}
   m_Layer: 0
   m_Name: Line
-  m_TagString: Untagged
+  m_TagString: ABullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

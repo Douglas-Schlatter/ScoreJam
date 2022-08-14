@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static State;
+using static Event;
+
 
 public class Mage : BaseEnemyController
 {
@@ -17,11 +20,12 @@ public class Mage : BaseEnemyController
         if (hitInfo)
         {
             Debug.Log(hitInfo.transform.name);
-            //if (hitInfo.transform.CompareTag("Enemy"))
-            //{
-            //    BaseEnemyController enemyCtr = hitInfo.transform.GetComponent<BaseEnemyController>();
-            //    enemyCtr.TakeDamage(lazerDmg);
-           // }
+            if (hitInfo.transform.CompareTag("Player"))
+            {
+                
+                    PlayerController pl = hitInfo.transform.GetComponent<PlayerController>();
+                    pl.TakeDamage( 1, this.tag);
+            }
 
 
 
@@ -53,7 +57,7 @@ public class Mage : BaseEnemyController
     private void FixedUpdate()
     {
         base.FixedUpdate();
-        if (GameController.iCont.timer - lastShoot > 1.0)
+        if (GameController.iCont.timer - lastShoot > 2.5)
         {
             lastShoot = GameController.iCont.timer;
             StartCoroutine(ShootLazer());

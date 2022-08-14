@@ -48,7 +48,7 @@ public class PlayerController : MonoBehaviour
     {
         Debug.Log(col.name);
 
-        if (col.CompareTag("Enemy") && (timer - lastHit) > 2.0)
+        if (col.CompareTag("Enemy") || col.CompareTag("ABullet") && (timer - lastHit) > 2.0)
         {
             lastHit = timer;
             life--;

@@ -860,6 +860,10 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 519420031}
+    - target: {fileID: 217788455370571801, guid: 92d9412970dea7a4a8315d9912d22d3b, type: 3}
+      propertyPath: moveSpeed
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 217788455370571802, guid: 92d9412970dea7a4a8315d9912d22d3b, type: 3}
       propertyPath: m_RootOrder
       value: 9

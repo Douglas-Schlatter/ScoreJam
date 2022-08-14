@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Pathfinding;
 
 public class BaseEnemyController : MonoBehaviour
 {
@@ -8,9 +9,11 @@ public class BaseEnemyController : MonoBehaviour
 
     public GameObject deathEffect;
     public float lastHit = 0;
-    public Pathfinding.AIPath pf;
-    public Pathfinding.AIDestinationSetter ds;
 
+    //Path related
+    public AIPath pf;
+    public AIDestinationSetter ds;
+  
 
 
     private void Awake()
@@ -63,11 +66,21 @@ public class BaseEnemyController : MonoBehaviour
     {
         
     }
-
+    */
     // Update is called once per frame
     void Update()
     {
-        
+        if (pf.desiredVelocity.x >= 0.01f)
+        {
+            transform.localScale = new Vector3(-1f, 1f, 1f);
+            //transform.localRotation = new Quaternion(0, 0, -90,0);
+        }
+        else if (pf.desiredVelocity.x <= -0.01f)
+        {
+            transform.localScale = new Vector3(1f, 1f, 1f);
+            //transform.localRotation = new Quaternion(0, 0, 90, 0);
+        }
     }
-    */
+      
+
 }

@@ -308,7 +308,9 @@ MonoBehaviour:
   - {fileID: 1608915849}
   - {fileID: 516187003}
   enemies:
-  - {fileID: 666452961154068375, guid: c658e5ab23f13ac47a97e5dedebb8b75, type: 3}
+  - {fileID: 4978532952741015349, guid: 8cefef8394ba0b74c8223a581051d55a, type: 3}
+  - {fileID: 7176178035732113631, guid: c18538e9672285848b5b9c5173a265dd, type: 3}
+  - {fileID: 6237029345577997469, guid: 2b05c93b84d0c3f439fbc01743939cbc, type: 3}
   sEnemies: []
   rEnem: 0
   rSpwan: 0

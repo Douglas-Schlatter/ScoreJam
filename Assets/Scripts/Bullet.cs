@@ -16,10 +16,13 @@ public class Bullet : MonoBehaviour
         Destroy(effect, 1f);
         Destroy(gameObject);
 
-        if (col.CompareTag("Enemy"))
+        if (this.tag != "ABullet")
         {
-            BaseEnemyController enemyCtr = col.GetComponent<BaseEnemyController>();
-            enemyCtr.TakeDamage(damage);
+            if (col.CompareTag("Enemy"))
+            {
+                BaseEnemyController enemyCtr = col.GetComponent<BaseEnemyController>();
+                enemyCtr.TakeDamage(damage);
+            }
         }
 
         

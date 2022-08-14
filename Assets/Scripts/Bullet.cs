@@ -23,7 +23,12 @@ public class Bullet : MonoBehaviour, IDamageSource
         GameObject effect = Instantiate(hitEffect, transform.position, Quaternion.identity);
         Destroy(effect, 1f);
         Destroy(gameObject);
+        if (this.tag != "ABullet")
+        {
+            DoDamage(col.gameObject, "Enemy", damage);      
+        }
 
-        DoDamage(col.gameObject, "Enemy", damage);
+
+        
     }
 }

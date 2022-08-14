@@ -308,7 +308,9 @@ MonoBehaviour:
   - {fileID: 1608915849}
   - {fileID: 516187003}
   enemies:
-  - {fileID: 666452961154068375, guid: c658e5ab23f13ac47a97e5dedebb8b75, type: 3}
+  - {fileID: 4978532952741015349, guid: 8cefef8394ba0b74c8223a581051d55a, type: 3}
+  - {fileID: 7176178035732113631, guid: c18538e9672285848b5b9c5173a265dd, type: 3}
+  - {fileID: 6237029345577997469, guid: 2b05c93b84d0c3f439fbc01743939cbc, type: 3}
   sEnemies: []
   rEnem: 0
   rSpwan: 0
@@ -858,6 +860,10 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 519420031}
+    - target: {fileID: 217788455370571801, guid: 92d9412970dea7a4a8315d9912d22d3b, type: 3}
+      propertyPath: moveSpeed
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 217788455370571802, guid: 92d9412970dea7a4a8315d9912d22d3b, type: 3}
       propertyPath: m_RootOrder
       value: 9

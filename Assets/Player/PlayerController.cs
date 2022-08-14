@@ -8,16 +8,16 @@ using static Event;
 public class PlayerController : MonoBehaviour, IDamageSource
 {
     float _munch = 1;
-    
+
     Vector3 MunchScale
     {
-        get 
+        get
         {
             var vec5 = new Vector3(5,5,5);
             _munch += 0.01f;
             return Vector3.Min(vec5, transform.localScale * _munch);
         }
-    } 
+    }
     //State
     public PlayerState PlayerStt { get; } = new();
 
@@ -107,8 +107,7 @@ public class PlayerController : MonoBehaviour, IDamageSource
     void OnTriggerEnter2D(Collider2D col)
     {
         Debug.Log(col.name);
-
-        if (col.CompareTag("Enemy") && (timer - lastHitSnap) > 2.0 && !@state.HasFlag(MadDashing))
+        if (col.CompareTag("Enemy") || col.CompareTag("ABullet") && (timer - lastHit) > 2.0)
         {
             lastHitSnap = timer;
             life--;
@@ -117,7 +116,7 @@ public class PlayerController : MonoBehaviour, IDamageSource
         {
             lastHitSnap = timer;
             DoDamage(col.gameObject, "Enemy", DashDamage);
-            
+
             gameObject.transform.localScale = MunchScale;
             PlayerStt.Next(@event.Union(DoWalk).ExceptFor(DoMadDash));
         }

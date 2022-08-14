@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 217788455370571802}
   - component: {fileID: 217788455370571803}
-  - component: {fileID: 217788455370571801}
+  - component: {fileID: 1704563605186203212}
   - component: {fileID: 217788455370571805}
   - component: {fileID: 217788455370571804}
   - component: {fileID: 2103830374191505694}
@@ -92,7 +92,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &217788455370571801
+--- !u!114 &1704563605186203212
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -107,9 +107,14 @@ MonoBehaviour:
   moveSpeed: 5
   life: 3
   timer: 0
-  lastHit: 0
+  lastHitSnap: 0
+  lastDashSnap: 0
   rb: {fileID: 2103830374191505694}
   cam: {fileID: 0}
+  DashDamage: 2
+  CurrentEvent: 
+  CurrentState: 
+  DashMod: 125
 --- !u!114 &217788455370571805
 MonoBehaviour:
   m_ObjectHideFlags: 0

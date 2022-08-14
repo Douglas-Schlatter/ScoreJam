@@ -107,7 +107,7 @@ public class PlayerController : MonoBehaviour, IDamageSource
     void OnTriggerEnter2D(Collider2D col)
     {
         Debug.Log(col.name);
-        if (col.CompareTag("Enemy") || col.CompareTag("ABullet") && (timer - lastHit) > 2.0)
+        if (col.CompareTag("Enemy") || col.CompareTag("ABullet") && (timer - lastHitSnap) > 2.0)
         {
             lastHitSnap = timer;
             life--;

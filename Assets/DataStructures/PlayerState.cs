@@ -12,7 +12,7 @@ public static class State
     public const int Walking = 1 << 1;
     public const int MadDashing = 1 << 2;
     public const int Recharging = 1 << 3;
-
+    public const int Hurt = 1 << 4;
     public static string ToString(int state)
     {
         string str = "";
@@ -26,7 +26,8 @@ public static class State
             str += nameof(MadDashing) + ",";
         if (state.HasFlag(Recharging))
             str += nameof(Recharging) + ",";
-
+        if (state.HasFlag(Hurt))
+            str += nameof(Hurt) + ",";
         return str[..^1];
     }
 }
@@ -36,6 +37,7 @@ public static class Event
     public const int DoWalk = 1 << 0;
     public const int DoMadDash = 1 << 1;
     public const int RechargeDash = 1 << 2;
+    public const int GetHurt = 1 << 3;
 
     public static string ToString(int @event)
     {
@@ -48,6 +50,9 @@ public static class Event
             str += nameof(DoMadDash)+ ",";
         if (@event.HasFlag(RechargeDash))
             str += nameof(RechargeDash)+ ",";
+        if (@event.HasFlag(GetHurt))
+            str += nameof(GetHurt)+ ",";
+        
         return str[..^1];
     }
 }
@@ -70,10 +75,11 @@ public class PlayerState : IStateMachine<int, int, PlayerState>
             { @event: DoWalk } => @state.Union(Walking).ExceptFor(MadDashing),
             { /* default */  } => @state,
         };
-        result = @event.HasFlag(RechargeDash) switch
+        result = @event.ExceptFor(moveEvents) switch
         {
-            true => result.ExceptFor(Recharging),
-            false => result
+            RechargeDash => result.Union(Recharging),
+            GetHurt => result.Union(Hurt),
+            _ => result,
         };
         return result;
     }

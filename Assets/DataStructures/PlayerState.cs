@@ -62,7 +62,7 @@ public class PlayerState : IStateMachine<int, int, PlayerState>
     public int Peek(int @event) => StateMachineMap(Current, @event);
     int StateMachineMap(int @state, int @event)
     {
-        int moveEvents = @event.Subset(DoNone | DoMadDash | DoWalk);
+        int moveEvents = @event.Subset(DoMadDash | DoWalk);
         var result = (@state, @event: moveEvents) switch
         {
             { @state: <= Recharging, @event: DoMadDash } => @state.ExceptFor(Walking).Union(MadDashing|Recharging),

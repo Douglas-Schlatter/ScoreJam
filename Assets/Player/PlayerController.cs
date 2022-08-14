@@ -5,8 +5,19 @@ using static Vector;
 using static Func;
 using static State;
 using static Event;
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour, IDamageSource
 {
+    float _munch = 1;
+    
+    Vector3 MunchScale
+    {
+        get 
+        {
+            var vec5 = new Vector3(5,5,5);
+            _munch += 0.01f;
+            return Vector3.Min(vec5, transform.localScale * _munch);
+        }
+    } 
     //State
     public PlayerState PlayerStt { get; } = new();
 
@@ -26,6 +37,8 @@ public class PlayerController : MonoBehaviour
     Vector2 movement;
     Vector2 mousePos;
     Vector2 LookDir => mousePos - rb.position;
+
+    public int DashDamage = 2;
 
     int @event = DoNone;
     int @state;
@@ -48,19 +61,18 @@ public class PlayerController : MonoBehaviour
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
         mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
-        
+
         static float dst_origin(Vector2 vec2) => Compose(Mathf.Abs, Vector.Distance(vec2))(Vector2.zero);
-        
+
         var move_state = (Move:     dst_origin(movement),
                           Velocity: dst_origin(rb.velocity));
 
         @event = move_state switch
         {
-            { Move: 0, Velocity: <= 0.3f } => @event.ExceptFor(DoWalk, DoMadDash).Union(EventsFromKeys()),
+            { Move: 0, Velocity: <= 0.1f } => @event.ExceptFor(DoWalk|DoMadDash).Union(EventsFromKeys()),
 
-            { Move: not 0, } => @event.Union(DoWalk).ExceptFor(DoMadDash),
-
-            { Move: 0, } => @event.ExceptFor(DoWalk),
+            { Move: not 0 } => @event.Union(DoWalk).ExceptFor(DoMadDash),
+            { Move: 0 } => @event.ExceptFor(DoWalk).Union(EventsFromKeys()),
         };
         PlayerStt.Next(@event);
     }
@@ -70,7 +82,7 @@ public class PlayerController : MonoBehaviour
         CurrentEvent = Event.ToString(@event);
         CurrentState = State.ToString(@state);
         timer += Time.deltaTime;
-        if(timer - lastDashSnap >= 2.0f)
+        if (timer - lastDashSnap >= 2.0f)
         {
             @event = @event.Union(RechargeDash);
         }
@@ -81,7 +93,6 @@ public class PlayerController : MonoBehaviour
         if (@state.HasFlag(MadDashing) && !@state.HasFlag(Recharging))
         {
             MadDash();
-            @event = @event.ExceptFor(DoMadDash);
         }
         else if (@state.HasFlag(Walking))
         {
@@ -97,23 +108,30 @@ public class PlayerController : MonoBehaviour
     {
         Debug.Log(col.name);
 
-        if (col.CompareTag("Enemy") && (timer - lastHitSnap) > 2.0)
+        if (col.CompareTag("Enemy") && (timer - lastHitSnap) > 2.0 && !@state.HasFlag(MadDashing))
         {
             lastHitSnap = timer;
             life--;
         }
+        else if (@state.HasFlag(MadDashing))
+        {
+            lastHitSnap = timer;
+            DoDamage(col.gameObject, "Enemy", DashDamage);
+            
+            gameObject.transform.localScale = MunchScale;
+            PlayerStt.Next(@event.Union(DoWalk).ExceptFor(DoMadDash));
+        }
         //Change the spirte of the player to pulsating red for 2 seconds
     }
-
     int EventsFromKeys()
     {
         int returnEvent = DoNone;
-        if (Input.GetKey(KeyCode.R) && !@state.AnyOf(MadDashing, Recharging))
+        if (Input.GetKey(KeyCode.Space) && !@state.HasFlag(Recharging))
         {
             returnEvent = returnEvent.Union(DoMadDash);
             lastDashSnap = timer;
         }
-        else if (!Input.GetKey(KeyCode.R))
+        else if (!Input.GetKey(KeyCode.Space))
         {
             returnEvent = returnEvent.ExceptFor(DoMadDash);
         }
@@ -121,6 +139,14 @@ public class PlayerController : MonoBehaviour
     }
     void MadDash()
     {
-        rb.AddForce(DashMod * rb.drag * LookDir.normalized, ForceMode2D.Force);
+        rb.AddForce(DashMod * Mathf.Max(1, rb.drag) * LookDir.normalized, ForceMode2D.Force);
+    }
+    public void DoDamage(GameObject col, string tag, int damage)
+    {
+        if (col.CompareTag(tag))
+        {
+            BaseEnemyController enemyCtr = col.GetComponent<BaseEnemyController>();
+            enemyCtr.TakeDamage(damage);
+        }
     }
 }

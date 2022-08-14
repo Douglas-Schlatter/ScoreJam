@@ -6,7 +6,6 @@ public class PlayerController : MonoBehaviour
 {
     //Status Effects
     public float moveSpeed = 5f;
-    public float life = 3f;
 
     //Time Related
     public float timer = 0.0f;
@@ -43,15 +42,15 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    //AKA Em colisão faça
+    //AKA Em colisï¿½o faï¿½a
     void OnTriggerEnter2D(Collider2D col)
     {
         Debug.Log(col.name);
 
         if (col.CompareTag("Enemy") && (timer - lastHit) > 2.0)
         {
-            lastHit = timer;
-            life--;
+            lastHitSnap = timer;
+            GameController.TakeDamage();
         }
         
         //Change the spirte of the player to pulsating red for 2 seconds

@@ -1,9 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
 using UnityEngine.SceneManagement;
 using Pathfinding;
+using TMPro;
 
 
 public class GameController : MonoBehaviour
@@ -25,7 +25,7 @@ public class GameController : MonoBehaviour
     public int score;
     public int multplier;
     public float testHit;
-    
+    public TextMeshProUGUI ScoreValue;
 
     //Time Related
     public float timer = 0.0f;
@@ -134,7 +134,7 @@ public class GameController : MonoBehaviour
     }
     private void LateUpdate()
     {
-        //ScoreValue.text = score.ToString();
+       ScoreValue.text = score.ToString();
     }
 
     void SpawnByTime(int max)

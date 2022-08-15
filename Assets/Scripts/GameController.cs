@@ -49,9 +49,11 @@ public class GameController : MonoBehaviour
     void Start()
     {
         //carregou = false;
-       //morto = false;
-       // vida = pc.life;
-       // aPath.Scan();
+        //morto = false;
+        // vida = pc.life;
+        // aPath.Scan();
+        iCont = GameObject.Find("GameController").GetComponent<GameController>();
+        player =  GameObject.Find("Player");
     }
 
     // Update is called once per frame

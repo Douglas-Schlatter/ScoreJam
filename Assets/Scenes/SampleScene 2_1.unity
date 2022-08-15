@@ -793,7 +793,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   version: 1
   data:
-    dataString: UEsDBBQAAAgIAACwn+uzIaNObgIAACcFAAALACQAZ3JhcGgwLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQFlVE1z2jAQ/SuMzoWxKU6gt9YQ0kMSJrSTiy/CWmMNsuTRR4Bk+O9dyTZ2CRfk9/btvl2t/Um4NDXkVum15uxJMSA/RsSfybdRTz7Cie6V3PIP6GLeOLOlD6Ih5pVarhCPvcyoCqzm+U+5Fz44QtBJXihdrdgeUmWsQbigwgBSWlmvlgh9jsgJ/8YLLznjaXrvTx94WkSjCx5zkBZ0H9oFjqNJtMDffBbPklbSKJzMBa1qYN5+L/weT5JWG99NkhAqsbk2KprcezpXQnDTmiP2XIfmU1obh61hAOMUmw2OUIJACXxfWm99KH8pCgO29avpeck1Tq3JS36pZpQVNYfG4DsVzleaJnfBWJP06Qs/jgNdaFU9dnXjyNewJc8Pr/ScU2MHsx7Cy956HOZ0pOJAdwLeSpDPaq2VkwxJq52XOgPTZf94bS0tIT/0eGP1BnT11xvrLtb3cAndn1LBq12Y5KwBtkKFiYd9AI3X8xsNh20xbQpEvYu/Bv7Q/XCtWuKBa2ORaruU3t5OOe1DySrMzHfjbKq0hAC3pmuQVNjzBtPY2yu84QZlb5gH6l+gtnjLde/FjSTAfXwU3VAbdbxelinV8QlM+eKs4BJ60554xjmlSspmw4Yz6WRbpwuaD2R7x9n/q0WSWZEsZmwXx8luQSkbz6P5NNklizmdTwugEQm7xyX2ScWmMdqOB29N9skl7ln3XRmtNa3DtjNNj2v+UanByLks1DbXAPKlyXA1DhqL4KvJVozjgLZgLZfhvslnRoTKD8Cya6IsdLo6WU2zPktGav6urEcykoYPSUY8fN3ljYZ3DkdfvEt2IZd/UEsDBBQAAAgIAACwn+umPk1/bQAAAHgAAAAJACQAbWV0YS5qc29uCgAgAAAAAAABABgAAIA+1d6xnQEAgD7V3rGdAQCAPtXesZ0Bq1YqSy0qzszPU7JSMNEz0jM011FQSi9KLMgoBooYgjilmSkgdrSSqUmaqaVJSpKhoWmSZWJiiq6FgYWRaZKppUWihVFaaqKBUixQfUllQapfYm4qRE9AYklGWmZeSmZeup57UWaKO8hopdhaAFBLAQItABQAAAgIAACwn+uzIaNObgIAACcFAAALACQAAAAAAAAAAAAAAAAAAABncmFwaDAuanNvbgoAIAAAAAAAAQAYAACAPtXesZ0BAIA+1d6xnQEAgD7V3rGdAVBLAQItABQAAAgIAACwn+umPk1/bQAAAHgAAAAJACQAAAAAAAAAAAAAALsCAABtZXRhLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQFQSwUGAAAAAAIAAgC4AAAAcwMAAAAA
+    dataString: UEsDBBQAAAgIAACwn+s4H+bBbgIAACgFAAALACQAZ3JhcGgwLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQFlVE1z2jAQ/SuMzoWxKU6gt9YQ0kMSJrSTiy/CWmMNsuTRR4Bk+O9dyTZ2CRfk9/btvl2t/Um4NDXkVum15uxJMSA/RsSfybdRTz7Cie6V3PIP6GLeOLOlD6Ih5pVarhCPvcyoCqzm+U+5Fz44QtBJXihdrdgeUmWsQbigwgBSWlmvlgh9jsgJ/8YLLznjaXrvTx94WkSjCx5zkBZ0H9oFjqNJtMDffBbPklbSKJzMBa1qYN5+L/weT5JWG99NkhAqsbk2KprcezpXQnDTmiP2XIfmU1obh61hAOMUmw2OUIJACXxfWm99KH8pCgO29avpeck1Tq3JS36pZpQVNYfG4DsVzleaJnfBWJP06Qs/jgNdaFU9dnXjyNewJc8Pr/ScU2MHsx7Cy956HOZ0pOJAdwLeSpDPaq2VkwxJq52XOgPTZf94bS0tIT/0eGP1BnT11xvrLtb3cAndn1LBq12Y5KwBtkKFiYd9AI3X8xsNh20xbQpEvYu/Bv7Q/XCtWuKBa2ORaruU3t5OOe1DySrMzHfjbKq0hAC3pmuQVNjzBtPY2yu84QZlb5gH6l+gtnjLde/FjSTAfXwU3VAbdbxelinV8QlM+eKs4BJ60554xjmlSspmw4Yz6WRbpwuaD2R7x9n/q0WSWZEsZmwXx8luQSkbz6P5NNklizmdTwugEQm7xyX2ScWmMdqOB29N9skl7ln3XRmtNa3DtjNNj2v+UamhQS4Ltc01gHxpUlydg8Yq+G6yFeM4oS1Yy2W4cPKZEaHyA7DsWjMLra5OVtOsz5KRmr8r65GMpOFLkhEPX5d5o+Gdw9EX75JdyOUfUEsDBBQAAAgIAACwn+umPk1/bQAAAHgAAAAJACQAbWV0YS5qc29uCgAgAAAAAAABABgAAIA+1d6xnQEAgD7V3rGdAQCAPtXesZ0Bq1YqSy0qzszPU7JSMNEz0jM011FQSi9KLMgoBooYgjilmSkgdrSSqUmaqaVJSpKhoWmSZWJiiq6FgYWRaZKppUWihVFaaqKBUixQfUllQapfYm4qRE9AYklGWmZeSmZeup57UWaKO8hopdhaAFBLAQItABQAAAgIAACwn+s4H+bBbgIAACgFAAALACQAAAAAAAAAAAAAAAAAAABncmFwaDAuanNvbgoAIAAAAAAAAQAYAACAPtXesZ0BAIA+1d6xnQEAgD7V3rGdAVBLAQItABQAAAgIAACwn+umPk1/bQAAAHgAAAAJACQAAAAAAAAAAAAAALsCAABtZXRhLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQFQSwUGAAAAAAIAAgC4AAAAcwMAAAAA
     upgradeData: 
     file_cachedStartup: {fileID: 4900000, guid: 465eaee16c4a48941963003d3635982f, type: 3}
     data_cachedStartup: 
@@ -1053,7 +1053,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 217788455370571798, guid: 92d9412970dea7a4a8315d9912d22d3b, type: 3}
       propertyPath: m_Name
-      value: Slime Player
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 217788455370571801, guid: 92d9412970dea7a4a8315d9912d22d3b, type: 3}
       propertyPath: cam
@@ -1141,7 +1141,7 @@ PrefabInstance:
       objectReference: {fileID: 519420031}
     - target: {fileID: 7991418579374025228, guid: 92d9412970dea7a4a8315d9912d22d3b, type: 3}
       propertyPath: life
-      value: 1000000
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7991418579374025228, guid: 92d9412970dea7a4a8315d9912d22d3b, type: 3}
       propertyPath: spriR
@@ -1150,6 +1150,10 @@ PrefabInstance:
     - target: {fileID: 7991418579374025228, guid: 92d9412970dea7a4a8315d9912d22d3b, type: 3}
       propertyPath: DashMod
       value: 250
+      objectReference: {fileID: 0}
+    - target: {fileID: 7991418579374025228, guid: 92d9412970dea7a4a8315d9912d22d3b, type: 3}
+      propertyPath: moveSpeed
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 7991418579374025228, guid: 92d9412970dea7a4a8315d9912d22d3b, type: 3}
       propertyPath: wps.Array.size
@@ -1180,29 +1184,6 @@ Rigidbody2D:
   m_CorrespondingSourceObject: {fileID: 2103830374191505694, guid: 92d9412970dea7a4a8315d9912d22d3b, type: 3}
   m_PrefabInstance: {fileID: 1309868716}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1309868734
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1309868717}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d9137f7f6d7c96429ea2d8a21edd7fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 5
-  life: 3
-  timer: 0
-  lastHitSnap: 0
-  lastDashSnap: 0
-  rb: {fileID: 1309868729}
-  cam: {fileID: 519420031}
-  DashDamage: 2
-  CurrentEvent: 
-  CurrentState: 
-  DashMod: 125
 --- !u!114 &1309868739 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7991418579374025228, guid: 92d9412970dea7a4a8315d9912d22d3b, type: 3}

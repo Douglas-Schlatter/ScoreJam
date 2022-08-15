@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ShooterController : MonoBehaviour
 {
+    public PlayerController pc;
 
     public bool bullet = false;
     public bool lazer = false;
@@ -39,7 +40,7 @@ public class ShooterController : MonoBehaviour
         }
         if (GameController.iCont.timer - duration > 0.4)
         {
-            GameController.iCont.player.GetComponent<PlayerController>().isSlash = false;
+            pc.isSlash = false;
             duration = 0;
             ef.enabled = false;
             col.enabled = false;
@@ -93,7 +94,7 @@ public class ShooterController : MonoBehaviour
     {
         duration = GameController.iCont.timer;
         lastSlice = GameController.iCont.timer;
-        GameController.iCont.player.GetComponent<PlayerController>().isSlash = true;
+        pc.isSlash = true;
         ef.enabled = true;
         col.enabled = true;
        // col2.enabled = true;

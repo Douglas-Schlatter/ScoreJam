@@ -38,6 +38,7 @@ public static class Event
     public const int DoMadDash = 1 << 1;
     public const int RechargeDash = 1 << 2;
     public const int GetHurt = 1 << 3;
+    public const int StopHurt = 1 << 4;
 
     public static string ToString(int @event)
     {
@@ -52,7 +53,9 @@ public static class Event
             str += nameof(RechargeDash)+ ",";
         if (@event.HasFlag(GetHurt))
             str += nameof(GetHurt)+ ",";
-        
+        if(@event.HasFlag(StopHurt))
+            str += nameof(StopHurt)+ ",";
+
         return str[..^1];
     }
 }
@@ -67,20 +70,14 @@ public class PlayerState : IStateMachine<int, int, PlayerState>
     public int Peek(int @event) => StateMachineMap(Current, @event);
     int StateMachineMap(int @state, int @event)
     {
-        int moveEvents = @event.Subset(DoMadDash | DoWalk);
-        var result = (@state, @event: moveEvents) switch
+        return @event switch
         {
-            { @state: <= Recharging, @event: DoMadDash } => @state.ExceptFor(Walking).Union(MadDashing|Recharging),
-            { @event: DoNone } => @state.ExceptFor(MadDashing | Walking),
-            { @event: DoWalk } => @state.Union(Walking).ExceptFor(MadDashing),
-            { /* default */  } => @state,
+            DoNone => @state.ExceptFor(MadDashing),
+            DoWalk => !@state.HasFlag(MadDashing) ? Walking : @state,
+            DoMadDash => @state.HasFlag(Recharging) ? @state : @state.Union(MadDashing|Recharging),
+            RechargeDash => @state.ExceptFor(Recharging),
+            GetHurt => state.Union(Hurt),
+            _ => @state,
         };
-        result = @event.ExceptFor(moveEvents) switch
-        {
-            RechargeDash => result.ExceptFor(Recharging, Hurt),
-            GetHurt => result.Union(Hurt),
-            _ => result,
-        };
-        return result;
     }
 }

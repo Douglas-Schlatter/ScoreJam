@@ -908,6 +908,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 217788455370571803, guid: 92d9412970dea7a4a8315d9912d22d3b, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 217788455370571804, guid: 92d9412970dea7a4a8315d9912d22d3b, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 217788455370571805, guid: 92d9412970dea7a4a8315d9912d22d3b, type: 3}
       propertyPath: lazer
       value: 0
@@ -928,11 +936,16 @@ PrefabInstance:
       propertyPath: DashMod
       value: 500
       objectReference: {fileID: 0}
+    - target: {fileID: 1704563605186203212, guid: 92d9412970dea7a4a8315d9912d22d3b, type: 3}
+      propertyPath: moveSpeed
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 2103830374191505694, guid: 92d9412970dea7a4a8315d9912d22d3b, type: 3}
       propertyPath: m_LinearDrag
       value: 5
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 217788455370571804, guid: 92d9412970dea7a4a8315d9912d22d3b, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 92d9412970dea7a4a8315d9912d22d3b, type: 3}
 --- !u!1 &1309868717 stripped
 GameObject:
@@ -957,9 +970,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SpriteRenderer: {fileID: 0}
+  PlayerCtrl: {fileID: 0}
   BaseSprite: {fileID: 0}
   HurtSprite: {fileID: -49112028, guid: 1a9d74af8dbb96248a1697feef167956, type: 3}
-  MadDashSprite: {fileID: 1057786908, guid: 5c8fcf625c6cc094bab1b251d81aaea0, type: 3}
+  MadDashSprite: {fileID: 21300000, guid: 77e79061b0421a5418ce83eacd288031, type: 2}
 --- !u!1 &1509620277
 GameObject:
   m_ObjectHideFlags: 0

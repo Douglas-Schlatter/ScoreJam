@@ -61,23 +61,31 @@ public class PlayerController : MonoBehaviour, IDamageSource
     // Update is called once per frame
     void Update()
     {
+        @state = PlayerStt.Current;
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
         mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
 
         static float dst_origin(Vector2 vec2) => Compose(Mathf.Abs, Vector.Distance(vec2))(Vector2.zero);
 
-        var move_state = (Move: dst_origin(movement),
-                          Velocity: dst_origin(rb.velocity));
-
-        @event = move_state switch
+        if(@state.HasFlag(Walking) && !state.HasFlag(MadDashing))
         {
-            { Move: 0, Velocity: <= 0.1f } => @event.ExceptFor(DoWalk | DoMadDash).Union(EventsFromKeys()),
-
-            { Move: not 0 } => @event.Union(DoWalk).ExceptFor(DoMadDash),
-            { Move: 0 } => @event.ExceptFor(DoWalk).Union(EventsFromKeys()),
-        };
-        PlayerStt.Next(@event);
+            rb.MovePosition(rb.position + moveSpeed * Time.fixedDeltaTime * movement);
+        }
+        if (dst_origin(movement) is not 0)
+        {
+            PlayerStt.Next(DoWalk);
+        }
+        if (dst_origin(rb.velocity) is 0)
+        {
+            PlayerStt.Next(DoNone);
+            OnStateChanged?.Invoke(@state);
+        }
+        if (timer - lastDashSnap > 2.0f)
+        {
+            PlayerStt.Next(RechargeDash);
+        }
+        EventsFromKeys();
     }
     void FixedUpdate()
     {
@@ -85,32 +93,9 @@ public class PlayerController : MonoBehaviour, IDamageSource
         CurrentEvent = Event.ToString(@event);
         CurrentState = State.ToString(@state);
         timer += Time.deltaTime;
-        if (timer - lastDashSnap >= 2.0f)
-        {
-            @event = @event.Union(RechargeDash);
-        }
-        else
-        {
-            @event = @event.ExceptFor(RechargeDash);
-        }
-        if (@state.HasFlag(MadDashing) && !@state.HasFlag(Recharging))
-        {
-            OnStateChanged?.Invoke(@state);
-            MadDash();
-        }
-        else if (@state.HasFlag(Walking))
-        {
-            rb.MovePosition(rb.position + moveSpeed * Time.fixedDeltaTime * movement);
-            rb.DropForce();
-            OnStateChanged?.Invoke(state);
-        }
-        else if (@state.HasFlag(Hurt))
-        {
-            OnStateChanged?.Invoke(state);
-        }
+
         float angle = Mathf.Atan2(LookDir.y, LookDir.x) * Mathf.Rad2Deg - 90f;
         rb.rotation = angle;
-        PlayerStt.Next(@event);
     }
     //AKA Em colisão faça
     void OnTriggerEnter2D(Collider2D col)
@@ -123,35 +108,28 @@ public class PlayerController : MonoBehaviour, IDamageSource
                 @event = @event.Union(GetHurt);
                 lastHitSnap = timer;
                 life--;
-            }
-            else
-            {
-                @event = @event.ExceptFor(GetHurt);
+                PlayerStt.Next(GetHurt);
+                OnStateChanged?.Invoke(PlayerStt.Current);
             }
         }
         else if (@state.HasFlag(MadDashing))
         {
             lastHitSnap = timer;
             DoDamage(col.gameObject, "Enemy", DashDamage);
-
             gameObject.transform.localScale = MunchScale;
-            PlayerStt.Next(@event.Union(DoWalk).ExceptFor(DoMadDash));
+            PlayerStt.Next(DoNone);
         }
         //Change the spirte of the player to pulsating red for 2 seconds
     }
-    int EventsFromKeys()
+    void EventsFromKeys()
     {
-        int returnEvent = DoNone;
         if (Input.GetKey(KeyCode.Space) && !@state.HasFlag(Recharging))
         {
-            returnEvent = returnEvent.Union(DoMadDash);
             lastDashSnap = timer;
+            MadDash();
+            PlayerStt.Next(DoMadDash);
+            OnStateChanged?.Invoke(PlayerStt.Current);
         }
-        else if (!Input.GetKey(KeyCode.Space))
-        {
-            returnEvent = returnEvent.ExceptFor(DoMadDash);
-        }
-        return returnEvent;
     }
     void MadDash()
     {

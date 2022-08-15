@@ -53,6 +53,7 @@ public class BaseEnemyController : MonoBehaviour
     void Die()
     {
         GameController.iCont.sEnemies.Remove(this.gameObject);
+        GameController.iCont.GiveScore(1);
         GameObject effect = Instantiate(deathEffect, transform.position, Quaternion.identity);
         Destroy(effect, 1f);
         Destroy(gameObject);

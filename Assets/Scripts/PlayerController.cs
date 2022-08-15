@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviour, IDamageSource
 
     //Status Effects
     public float moveSpeed = 5f;
+    public float life = 3f;
 
     //Time Related
     public float timer = 0.0f;

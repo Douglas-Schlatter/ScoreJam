@@ -299,8 +299,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1309868717}
+  pc: {fileID: 1309868734}
+  score: 0
+  multplier: 0
+  testHit: 0
   timer: 0
   lastSpwan: 0
+  lastHitPlayer: 0
   spawanLocations:
   - {fileID: 297951488}
   - {fileID: 187579434}
@@ -985,6 +990,17 @@ Rigidbody2D:
   m_CorrespondingSourceObject: {fileID: 2103830374191505694, guid: 92d9412970dea7a4a8315d9912d22d3b, type: 3}
   m_PrefabInstance: {fileID: 1309868716}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1309868734 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7991418579374025228, guid: 92d9412970dea7a4a8315d9912d22d3b, type: 3}
+  m_PrefabInstance: {fileID: 1309868716}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1309868717}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4e870b2f20ae9746961ea0cab999d9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1509620277
 GameObject:
   m_ObjectHideFlags: 0

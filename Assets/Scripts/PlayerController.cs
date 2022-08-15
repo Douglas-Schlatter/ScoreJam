@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour, IDamageSource
     {
         get
         {
-            var vec5 = new Vector3(5, 5, 5);
+            var vec5 = new Vector3(4, 4, 4);
             _munch += 0.01f;
             return Vector3.Min(vec5, transform.localScale * _munch);
         }
@@ -56,6 +56,7 @@ public class PlayerController : MonoBehaviour, IDamageSource
     public GameObject[] wps;
     float targetAngle;
     public int curWpn;
+    public ShooterController sc;
     private void Awake()
     {
         rb = rb is null ? GetComponent<Rigidbody2D>() : rb;
@@ -109,16 +110,16 @@ public class PlayerController : MonoBehaviour, IDamageSource
         targetAngle = this.transform.localRotation.eulerAngles.z;
         if (0<= targetAngle && targetAngle <= 180f)   
         {
-            if ( wps[0].transform.localScale.y<0)
+            if ( wps[curWpn].transform.localScale.y<0)
             {
-                wps[0].transform.localScale = new Vector3(wps[0].transform.localScale.x, -wps[0].transform.localScale.y, wps[0].transform.localScale.z);
+                wps[curWpn].transform.localScale = new Vector3(wps[curWpn].transform.localScale.x, -wps[curWpn].transform.localScale.y, wps[curWpn].transform.localScale.z);
             }
         }
         else if ( 180 < targetAngle && targetAngle <= 360f)
         {
-            if (0<wps[0].transform.localScale.y)
+            if (0<wps[curWpn].transform.localScale.y)
             {
-                wps[0].transform.localScale = new Vector3(wps[0].transform.localScale.x, -wps[0].transform.localScale.y, wps[0].transform.localScale.z);
+                wps[curWpn].transform.localScale = new Vector3(wps[curWpn].transform.localScale.x, -wps[curWpn].transform.localScale.y, wps[curWpn].transform.localScale.z);
             }
             //wps[0].transform.localScale = new Vector3(wps[0].transform.localScale.x, wps[0].transform.localScale.y, wps[0].transform.localScale.z);
         }
@@ -146,6 +147,42 @@ public class PlayerController : MonoBehaviour, IDamageSource
             lastHitSnap = timer;
             DoDamage(col.gameObject, "Enemy", DashDamage);
 
+            if (col.CompareTag("A"))
+            {
+                DoDamage(col.gameObject, "A", DashDamage);
+                curWpn = 2;
+                wps[2].GetComponent<SpriteRenderer>().enabled = true;
+                wps[0].GetComponent<SpriteRenderer>().enabled = false;
+                wps[1].GetComponent<SpriteRenderer>().enabled = false;
+                sc.bullet = true;
+                sc.lazer = false;
+                sc.sword = false;
+            }
+            else if (col.CompareTag("M"))
+            {
+                DoDamage(col.gameObject, "M", DashDamage);
+                curWpn = 1;
+                wps[1].GetComponent<SpriteRenderer>().enabled = true;
+                wps[2].GetComponent<SpriteRenderer>().enabled = false;
+                wps[0].GetComponent<SpriteRenderer>().enabled = false;
+                sc.bullet = false;
+                sc.lazer = true;
+                sc.sword = false;
+            }
+            else if (col.CompareTag("K"))
+            {
+                DoDamage(col.gameObject, "K", DashDamage);
+                curWpn = 0;
+                wps[0].GetComponent<SpriteRenderer>().enabled = true;
+                wps[1].GetComponent<SpriteRenderer>().enabled = false;
+                wps[2].GetComponent<SpriteRenderer>().enabled = false;
+                sc.bullet = false;
+                sc.lazer = false;
+                sc.sword = true;
+            }
+            
+            
+            
             gameObject.transform.localScale = MunchScale;
             
         }

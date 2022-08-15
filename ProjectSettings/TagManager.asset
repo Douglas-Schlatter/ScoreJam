@@ -7,6 +7,9 @@ TagManager:
   - Enemy
   - Bullet
   - ABullet
+  - A
+  - M
+  - K
   layers:
   - Default
   - TransparentFX

@@ -25,7 +25,10 @@ public class Bullet : MonoBehaviour, IDamageSource
         Destroy(gameObject);
         if (this.tag != "ABullet")
         {
-            DoDamage(col.gameObject, "Enemy", damage);      
+            DoDamage(col.gameObject, "Enemy", damage);
+            DoDamage(col.gameObject, "M", damage);
+            DoDamage(col.gameObject, "A", damage);
+            DoDamage(col.gameObject, "K", damage);
         }
 
 

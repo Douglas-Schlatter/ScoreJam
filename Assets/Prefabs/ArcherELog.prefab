@@ -50,7 +50,7 @@ GameObject:
   - component: {fileID: 8931345717505787316}
   m_Layer: 0
   m_Name: ArcherELog
-  m_TagString: Enemy
+  m_TagString: A
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -5,8 +5,10 @@ using UnityEngine;
 public class ShooterController : MonoBehaviour
 {
 
-    public bool bullet = true;
+    public bool bullet = false;
     public bool lazer = false;
+    public bool sword = false;
+
     public int lazerDmg = 1;
     public Transform firePoint;
     public GameObject bulletPrefab;
@@ -23,6 +25,10 @@ public class ShooterController : MonoBehaviour
                 ShootBullet();
             else if (lazer)
                 StartCoroutine(ShootLazer());
+            else if (sword)
+            {
+                Swing();
+            }
         }
     }
 
@@ -32,7 +38,7 @@ public class ShooterController : MonoBehaviour
         if (hitInfo)
         {
             Debug.Log(hitInfo.transform.name);
-            if (hitInfo.transform.CompareTag("Enemy"))
+            if (hitInfo.transform.CompareTag("Enemy")|| hitInfo.transform.CompareTag("A") || hitInfo.transform.CompareTag("M") || hitInfo.transform.CompareTag("K"))
             {
                 BaseEnemyController enemyCtr = hitInfo.transform.GetComponent<BaseEnemyController>();
                 enemyCtr.TakeDamage(lazerDmg);
@@ -62,5 +68,10 @@ public class ShooterController : MonoBehaviour
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
         Rigidbody2D rb =  bullet.GetComponent<Rigidbody2D>();
         rb.AddForce(firePoint.up * bulletForce, ForceMode2D.Impulse);
+    }
+
+    void Swing() 
+    {
+    
     }
 }

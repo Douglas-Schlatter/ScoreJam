@@ -114,6 +114,8 @@ MonoBehaviour:
   lastDashSnap: 0
   rb: {fileID: 2103830374191505694}
   cam: {fileID: 0}
+  canDash: 1
+  isDash: 0
   DashDamage: 2
   CurrentEvent: 
   CurrentState: 
@@ -123,6 +125,7 @@ MonoBehaviour:
   - {fileID: 13666012813682050}
   - {fileID: 2528066495685338759}
   curWpn: 0
+  sc: {fileID: 217788455370571805}
 --- !u!114 &217788455370571805
 MonoBehaviour:
   m_ObjectHideFlags: 0

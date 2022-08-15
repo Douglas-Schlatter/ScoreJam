@@ -21,7 +21,7 @@ public class BaseEnemyController : MonoBehaviour
         ds.target = GameController.iCont.player.transform;
     }
 
-    private void FixedUpdate()
+    protected virtual void FixedUpdate()
     {
         if (GameController.iCont.timer - lastHit > 0.1)
         {
@@ -53,6 +53,7 @@ public class BaseEnemyController : MonoBehaviour
     void Die()
     {
         GameController.iCont.sEnemies.Remove(this.gameObject);
+        GameController.iCont.GiveScore(1);
         GameObject effect = Instantiate(deathEffect, transform.position, Quaternion.identity);
         Destroy(effect, 1f);
         Destroy(gameObject);
@@ -68,7 +69,7 @@ public class BaseEnemyController : MonoBehaviour
     }
     */
     // Update is called once per frame
-    void Update()
+    protected virtual void Update()
     {
         if (pf.desiredVelocity.x >= 0.01f)
         {

@@ -9,6 +9,7 @@ public class GameController : MonoBehaviour
     public static GameController iCont { get; private set; }
 
     public GameObject player;
+    public GameObject holder;
     public int vida = 3;
     public static bool morto = false;
     public SpriteRenderer Vida1;
@@ -52,7 +53,9 @@ public class GameController : MonoBehaviour
         //morto = false;
         // vida = pc.life;
         // aPath.Scan();
+        //Pegar sem precisar referencia
         iCont = GameObject.Find("GameController").GetComponent<GameController>();
+        holder = GameObject.Find("Holder");
         player =  GameObject.Find("Player");
     }
 
@@ -71,6 +74,7 @@ public class GameController : MonoBehaviour
         }else if (vida <= 0)
         {
             morto = true;
+            holder.GetComponent<Holder>().scoreCopy = score;
             SceneManager.LoadScene(4);
         }
     }

@@ -14,7 +14,7 @@ public class Knight : BaseEnemyController
         base.Update();
         if (dst_origin(GameController.iCont.player.transform.position) < 2.0 && GameController.iCont.timer - lastSlice > 2.0)
         {
-            Debug.Log("SLICE!");
+            //Debug.Log("SLICE!");
             lastSlice = GameController.iCont.timer;
 
             ef.enabled = true;

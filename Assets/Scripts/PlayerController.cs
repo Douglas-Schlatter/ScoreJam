@@ -57,6 +57,7 @@ public class PlayerController : MonoBehaviour, IDamageSource
     float targetAngle;
     public int curWpn;
     public ShooterController sc;
+    public bool isSlash = false;
 
     //Sprite related
     public SpriteRenderer spriR;
@@ -145,8 +146,8 @@ public class PlayerController : MonoBehaviour, IDamageSource
     //AKA Em colis�o fa�a
     void OnTriggerEnter2D(Collider2D col)
     {
-        Debug.Log(col.name);
-        if (!isDash )
+        //Debug.Log(col.name);
+        if (!isDash && !isSlash)
         {
 
             if (col.CompareTag("Enemy") || col.CompareTag("ABullet") || col.CompareTag("A") || col.CompareTag("K") || col.CompareTag("M") && (timer - lastHitSnap) > 2.0)
@@ -232,13 +233,14 @@ public class PlayerController : MonoBehaviour, IDamageSource
 
     public void TakeDamage(int damage, string tag)
     {
-        if (!isDash)
+        if (!isDash && !isSlash)
         {
+            Debug.Log("Pode tomar dano");
 
-            if (tag == "Enemy" || tag ==  ("A") || tag ==  ("M") || tag ==  ("K") && (timer - lastHitSnap) > 2.0)
+            if (tag == "Enemy" || tag ==  "A" || tag ==  "M" || tag ==  "K" && (timer - lastHitSnap) > 2.0)
             {
                 lastHitSnap = timer;
-               life--;
+                life--;
             }
         }
     }

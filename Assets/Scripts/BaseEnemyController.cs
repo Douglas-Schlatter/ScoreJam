@@ -86,6 +86,18 @@ public class BaseEnemyController : MonoBehaviour
             //transform.localRotation = new Quaternion(0, 0, 90, 0);
         }
     }
-      
+    
+    private void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.CompareTag("Slash"))
+        {
+            health -= 2 ;
+            if (health <= 0)
+            {
+                Die();
+            }
+        }
+    }
+    
 
 }

@@ -22,7 +22,7 @@ public class Mage : BaseEnemyController
             Debug.Log(hitInfo.transform.name);
             if (hitInfo.transform.CompareTag("Player"))
             {
-                
+                Debug.Log(" LAZER");
                     PlayerController pl = hitInfo.transform.GetComponent<PlayerController>();
                     pl.TakeDamage( 1, this.tag);
             }

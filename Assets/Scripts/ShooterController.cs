@@ -16,6 +16,13 @@ public class ShooterController : MonoBehaviour
 
     public float bulletForce = 20f;
 
+    //swing related
+    public SpriteRenderer ef;
+    public Collider2D col;
+    public Collider2D col2;
+    public float duration = 0;
+    public float lastSlice = 0;
+
     // Update is called once per frame
     void Update()
     {
@@ -25,10 +32,22 @@ public class ShooterController : MonoBehaviour
                 ShootBullet();
             else if (lazer)
                 StartCoroutine(ShootLazer());
-            else if (sword)
+            else if (sword && (GameController.iCont.timer - lastSlice) > 0.6)
             {
                 Swing();
             }
+        }
+        if (GameController.iCont.timer - duration > 0.4)
+        {
+            GameController.iCont.player.GetComponent<PlayerController>().isSlash = false;
+            duration = 0;
+            ef.enabled = false;
+            col.enabled = false;
+            //col2.enabled = false; // phisical colission
+        }
+        if (GameController.iCont.timer - lastSlice >= 0.6)
+        {
+            lastSlice = 0;
         }
     }
 
@@ -57,7 +76,7 @@ public class ShooterController : MonoBehaviour
         lineRender.enabled = true;
 
         //wait one frame
-        yield return new WaitForSeconds(0.02f);
+        yield return new WaitForSeconds(0.05f);
 
         lineRender.enabled = false;
 
@@ -72,6 +91,11 @@ public class ShooterController : MonoBehaviour
 
     void Swing() 
     {
-    
+        duration = GameController.iCont.timer;
+        lastSlice = GameController.iCont.timer;
+        GameController.iCont.player.GetComponent<PlayerController>().isSlash = true;
+        ef.enabled = true;
+        col.enabled = true;
+       // col2.enabled = true;
     }
 }

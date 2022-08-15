@@ -11,6 +11,7 @@ public class PlayerSprites : MonoBehaviour, IEnumerable<Sprite>
     public Sprite BaseSprite;
     public Sprite HurtSprite;
     public Sprite MadDashSprite;
+    public Sprite HurtDashSprite;
     private void Awake()
     {
         PlayerCtrl = GetComponent<PlayerController>();
@@ -20,7 +21,11 @@ public class PlayerSprites : MonoBehaviour, IEnumerable<Sprite>
     }
     public void SubscribrChangeSprite(int stt)
     {
-        if (stt.HasFlag(Hurt))
+        if(stt.HasFlag(Hurt|MadDashing))
+        {
+            SpriteRenderer.sprite = HurtDashSprite;
+        }
+        else if (stt.HasFlag(Hurt))
         {
             SpriteRenderer.sprite = HurtSprite;
         }

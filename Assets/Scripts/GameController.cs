@@ -50,7 +50,7 @@ public class GameController : MonoBehaviour
         }else if (vida == 0)
         {
             morto = true;
-            SceneManager.LoadScene(3);
+            SceneManager.LoadScene(4);
         }
     }
 

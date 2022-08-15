@@ -22,12 +22,12 @@ public class MenuSelector : MonoBehaviour
 
     public void ScoreBoard()
     {
-        SceneManager.LoadScene(4);
+        SceneManager.LoadScene(5);
     }
 
     public void Credits()
     {
-        SceneManager.LoadScene(5);
+        SceneManager.LoadScene(4);
     }
 
     public void Back()

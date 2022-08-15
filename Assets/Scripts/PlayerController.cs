@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 using static Vector;
 using static Func;
 using static State;
@@ -9,11 +10,13 @@ public class PlayerController : MonoBehaviour, IDamageSource
 {
     float _munch = 1;
 
+    public event Action<int> OnStateChanged;
+
     Vector3 MunchScale
     {
         get
         {
-            var vec5 = new Vector3(5, 5, 5);
+            var vec5 = new Vector3(5,5,5);
             _munch += 0.01f;
             return Vector3.Min(vec5, transform.localScale * _munch);
         }
@@ -22,8 +25,9 @@ public class PlayerController : MonoBehaviour, IDamageSource
     public PlayerState PlayerStt { get; } = new();
 
     //Status Effects
-    public float moveSpeed = 5f;
+    public int moveSpeed = 5;
     public int life = 3;
+
     //Time Related
     public float timer = 0.0f;
     public float lastHitSnap = 0.0f;
@@ -49,7 +53,6 @@ public class PlayerController : MonoBehaviour, IDamageSource
 
     public float DashMod = 125f;
 
-
     private void Awake()
     {
         rb = rb is null ? GetComponent<Rigidbody2D>() : rb;
@@ -64,12 +67,12 @@ public class PlayerController : MonoBehaviour, IDamageSource
 
         static float dst_origin(Vector2 vec2) => Compose(Mathf.Abs, Vector.Distance(vec2))(Vector2.zero);
 
-        var move_state = (Move: dst_origin(movement),
+        var move_state = (Move:     dst_origin(movement),
                           Velocity: dst_origin(rb.velocity));
 
         @event = move_state switch
         {
-            { Move: 0, Velocity: <= 0.1f } => @event.ExceptFor(DoWalk | DoMadDash).Union(EventsFromKeys()),
+            { Move: 0, Velocity: <= 0.1f } => @event.ExceptFor(DoWalk|DoMadDash).Union(EventsFromKeys()),
 
             { Move: not 0 } => @event.Union(DoWalk).ExceptFor(DoMadDash),
             { Move: 0 } => @event.ExceptFor(DoWalk).Union(EventsFromKeys()),
@@ -92,32 +95,31 @@ public class PlayerController : MonoBehaviour, IDamageSource
         }
         if (@state.HasFlag(MadDashing) && !@state.HasFlag(Recharging))
         {
+            OnStateChanged?.Invoke(@state);
             MadDash();
         }
         else if (@state.HasFlag(Walking))
         {
             rb.MovePosition(rb.position + moveSpeed * Time.fixedDeltaTime * movement);
             rb.DropForce();
+            OnStateChanged?.Invoke(state);
+        }
+        else if (@state.HasFlag(Hurt))
+        {
+            OnStateChanged?.Invoke(state);
         }
         float angle = Mathf.Atan2(LookDir.y, LookDir.x) * Mathf.Rad2Deg - 90f;
         rb.rotation = angle;
         PlayerStt.Next(@event);
     }
-
-
-    //AKA Em colis�o fa�a
+    //AKA Em colisão faça
     void OnTriggerEnter2D(Collider2D col)
     {
         Debug.Log(col.name);
-        if (!state.HasFlag(MadDashing))
+        if (col.CompareTag("Enemy") || col.CompareTag("ABullet") && (timer - lastHitSnap) > 2.0)
         {
-
-            if (col.CompareTag("Enemy") || col.CompareTag("ABullet") && (timer - lastHitSnap) > 2.0)
-            {
-                Debug.Log("DANO");
-                lastHitSnap = timer;
-                life--;
-            }
+            lastHitSnap = timer;
+            life--;
         }
         else if (@state.HasFlag(MadDashing))
         {
@@ -126,7 +128,6 @@ public class PlayerController : MonoBehaviour, IDamageSource
 
             gameObject.transform.localScale = MunchScale;
             PlayerStt.Next(@event.Union(DoWalk).ExceptFor(DoMadDash));
-            
         }
         //Change the spirte of the player to pulsating red for 2 seconds
     }
@@ -156,7 +157,6 @@ public class PlayerController : MonoBehaviour, IDamageSource
             enemyCtr.TakeDamage(damage);
         }
     }
-
     public void TakeDamage(int damage, string tag)
     {
         if (!state.HasFlag(MadDashing))
@@ -165,7 +165,7 @@ public class PlayerController : MonoBehaviour, IDamageSource
             if (tag == "Enemy" || tag == "ABullet" && (timer - lastHitSnap) > 2.0)
             {
                 lastHitSnap = timer;
-               life--;
+                life--;
             }
         }
     }

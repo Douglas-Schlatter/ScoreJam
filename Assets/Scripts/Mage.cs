@@ -24,7 +24,7 @@ public class Mage : BaseEnemyController
             {
                 
                     PlayerController pl = hitInfo.transform.GetComponent<PlayerController>();
-                    pl.TakeDamage( 1, this.tag);
+                    pl.TakeDamage(1, this.tag);
             }
 
 

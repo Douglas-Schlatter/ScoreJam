@@ -57,7 +57,7 @@ public class GameController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        print(vida);
+        //print(vida);
         vida = pc.life;
         if (vida == 2)
         {

@@ -33,9 +33,12 @@ public class PlayerController : MonoBehaviour, IDamageSource
     public Rigidbody2D rb;
     public Camera cam;
 
+    //Movement related
     Vector2 movement;
     Vector2 mousePos;
     Vector2 LookDir => mousePos - rb.position;
+    public bool canDash = true;
+    public bool isDash = false;
 
     public int DashDamage = 2;
 
@@ -47,9 +50,12 @@ public class PlayerController : MonoBehaviour, IDamageSource
     [SerializeField]
     string CurrentState;
 
-    public float DashMod = 125f;
+    public float DashMod = 500f;
 
-
+    //Weapon Related
+    public GameObject[] wps;
+    float targetAngle;
+    public int curWpn;
     private void Awake()
     {
         rb = rb is null ? GetComponent<Rigidbody2D>() : rb;
@@ -63,46 +69,61 @@ public class PlayerController : MonoBehaviour, IDamageSource
         movement.y = Input.GetAxisRaw("Vertical");
         mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
 
-        static float dst_origin(Vector2 vec2) => Compose(Mathf.Abs, Vector.Distance(vec2))(Vector2.zero);
-
-        var move_state = (Move: dst_origin(movement),
-                          Velocity: dst_origin(rb.velocity));
-
-        @event = move_state switch
+        if (Input.GetKeyDown(KeyCode.Space) && canDash)
         {
-            { Move: 0, Velocity: <= 0.1f } => @event.ExceptFor(DoWalk | DoMadDash).Union(EventsFromKeys()),
-
-            { Move: not 0 } => @event.Union(DoWalk).ExceptFor(DoMadDash),
-            { Move: 0 } => @event.ExceptFor(DoWalk).Union(EventsFromKeys()),
-        };
-        PlayerStt.Next(@event);
-    }
-    void FixedUpdate()
-    {
-        @state = PlayerStt.Current;
-        CurrentEvent = Event.ToString(@event);
-        CurrentState = State.ToString(@state);
-        timer += Time.deltaTime;
-        if (timer - lastDashSnap >= 2.0f)
-        {
-            @event = @event.Union(RechargeDash);
+            Debug.Log("DASH");
+            canDash = false;
+            isDash = true;
+            lastDashSnap = GameController.iCont.timer;
+            //MadDash();
         }
-        else
-        {
-            @event = @event.ExceptFor(RechargeDash);
-        }
-        if (@state.HasFlag(MadDashing) && !@state.HasFlag(Recharging))
+        if (isDash && (GameController.iCont.timer - lastDashSnap) < 0.2)
         {
             MadDash();
         }
-        else if (@state.HasFlag(Walking))
+        else if (isDash && (GameController.iCont.timer - lastDashSnap) > 0.2)
         {
-            rb.MovePosition(rb.position + moveSpeed * Time.fixedDeltaTime * movement);
-            rb.DropForce();
+            isDash = false;
         }
+
+        if(!isDash && (GameController.iCont.timer - lastDashSnap) > 2.0)
+        {
+            canDash = true;
+        }
+
+
+    }
+    void FixedUpdate()
+    {
+
+        timer += Time.deltaTime;
+       
         float angle = Mathf.Atan2(LookDir.y, LookDir.x) * Mathf.Rad2Deg - 90f;
         rb.rotation = angle;
-        PlayerStt.Next(@event);
+
+        rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
+
+
+        //girar aqui a weapon
+        //Debug.Log("Rotation: " + this.transform.localRotation.eulerAngles.z);
+        targetAngle = this.transform.localRotation.eulerAngles.z;
+        if (0<= targetAngle && targetAngle <= 180f)   
+        {
+            if ( wps[0].transform.localScale.y<0)
+            {
+                wps[0].transform.localScale = new Vector3(wps[0].transform.localScale.x, -wps[0].transform.localScale.y, wps[0].transform.localScale.z);
+            }
+        }
+        else if ( 180 < targetAngle && targetAngle <= 360f)
+        {
+            if (0<wps[0].transform.localScale.y)
+            {
+                wps[0].transform.localScale = new Vector3(wps[0].transform.localScale.x, -wps[0].transform.localScale.y, wps[0].transform.localScale.z);
+            }
+            //wps[0].transform.localScale = new Vector3(wps[0].transform.localScale.x, wps[0].transform.localScale.y, wps[0].transform.localScale.z);
+        }
+
+
     }
 
 
@@ -110,23 +131,22 @@ public class PlayerController : MonoBehaviour, IDamageSource
     void OnTriggerEnter2D(Collider2D col)
     {
         Debug.Log(col.name);
-        if (!state.HasFlag(MadDashing))
+        if (!isDash)
         {
 
             if (col.CompareTag("Enemy") || col.CompareTag("ABullet") && (timer - lastHitSnap) > 2.0)
             {
-                Debug.Log("DANO");
+               // Debug.Log("DANO");
                 lastHitSnap = timer;
                 life--;
             }
         }
-        else if (@state.HasFlag(MadDashing))
+        else if (isDash)
         {
             lastHitSnap = timer;
             DoDamage(col.gameObject, "Enemy", DashDamage);
 
             gameObject.transform.localScale = MunchScale;
-            PlayerStt.Next(@event.Union(DoWalk).ExceptFor(DoMadDash));
             
         }
         //Change the spirte of the player to pulsating red for 2 seconds
@@ -147,7 +167,7 @@ public class PlayerController : MonoBehaviour, IDamageSource
     }
     void MadDash()
     {
-        rb.AddForce(DashMod * Mathf.Max(1, rb.drag) * LookDir.normalized, ForceMode2D.Force);
+        rb.AddForce(DashMod * LookDir.normalized, ForceMode2D.Force);
     }
     public void DoDamage(GameObject col, string tag, int damage)
     {

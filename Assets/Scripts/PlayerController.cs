@@ -54,6 +54,7 @@ public class PlayerController : MonoBehaviour, IDamageSource
     {
         rb = rb is null ? GetComponent<Rigidbody2D>() : rb;
         cam = cam is null ? Camera.main : cam;
+        life = life <0 ? 3 : life;
     }
     // Update is called once per frame
     void Update()

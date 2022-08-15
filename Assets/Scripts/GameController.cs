@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Pathfinding;
 
 public class GameController : MonoBehaviour
 {
     public static GameController iCont { get; private set; }
+
     public GameObject player;
     public int vida = 3;
     public static bool morto = false;
@@ -14,6 +16,7 @@ public class GameController : MonoBehaviour
     public SpriteRenderer Vida3;
     public Sprite CoraçãoVazio;
     public PlayerController pc;
+    public AstarPath aPath;
 
     //score related
     public int score;
@@ -33,15 +36,22 @@ public class GameController : MonoBehaviour
     public int rEnem;
     public int rSpwan;
 
+    //scene loader
+    //public static bool carregou;
     private void Awake()
     {
         iCont = iCont is null ? this : iCont;
         morto = false;
         vida = pc.life;
+        //DontDestroyOnLoad(this.gameObject);
     }
     // Start is called before the first frame update
     void Start()
     {
+        //carregou = false;
+       //morto = false;
+       // vida = pc.life;
+       // aPath.Scan();
     }
 
     // Update is called once per frame
@@ -56,7 +66,7 @@ public class GameController : MonoBehaviour
         else if (vida == 1)
         {
             Vida2.sprite = CoraçãoVazio;
-        }else if (vida == 0)
+        }else if (vida <= 0)
         {
             morto = true;
             SceneManager.LoadScene(4);
@@ -71,30 +81,33 @@ public class GameController : MonoBehaviour
         timer += Time.deltaTime;
         lastHitPlayer = pc.lastHitSnap;
         genMult();
-
-        switch (multplier)
+        if (vida > 0)
         {
+            switch (multplier)
+            {
 
-            case 1:
-                SpawnByTime(6);
-                break;
-            case 2:
-                SpawnByTime(7);
-                break;
-            case 4:
-                SpawnByTime(8);
-                break;
-            case 6:
-                SpawnByTime(9);
-                break;
-            case 10:
-                SpawnByTime(10);
-                break;
+                case 1:
+                    SpawnByTime(6);
+                    break;
+                case 2:
+                    SpawnByTime(7);
+                    break;
+                case 4:
+                    SpawnByTime(8);
+                    break;
+                case 6:
+                    SpawnByTime(9);
+                    break;
+                case 10:
+                    SpawnByTime(10);
+                    break;
 
-            default:
-                SpawnByTime(6);
-                break;
+                default:
+                    SpawnByTime(6);
+                    break;
+            }
         }
+
         /*
          if (6 > sEnemies.Count) 
          {
@@ -120,7 +133,9 @@ public class GameController : MonoBehaviour
                 rSpwan = Random.Range(0, spawanLocations.Length);
                 rEnem = Random.Range(0, enemies.Length);
                 GameObject test = (GameObject)Instantiate(enemies[rEnem], spawanLocations[rSpwan].transform.position, spawanLocations[rSpwan].transform.rotation);
+                test.GetComponent<AIDestinationSetter>().target = player.transform;
                 //st.TryGetComponent(Pathfinding.AIDestinationSetter)
+                 
                 sEnemies.Add(test);
                 lastSpwan = timer;
             }

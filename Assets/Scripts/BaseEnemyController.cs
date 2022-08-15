@@ -18,7 +18,11 @@ public class BaseEnemyController : MonoBehaviour
 
     private void Awake()
     {
-        ds.target = GameController.iCont.player.transform;
+        //ds.target = GameController.iCont.player.transform;
+    }
+    private void Start()
+    {
+        
     }
 
     protected virtual void FixedUpdate()

@@ -126,6 +126,10 @@ MonoBehaviour:
   - {fileID: 2528066495685338759}
   curWpn: 0
   sc: {fileID: 217788455370571805}
+  spriR: {fileID: 0}
+  BaseSprite: {fileID: 1177853191, guid: 03fcaa8980f2f7e4dbe25db6e6ffc143, type: 3}
+  HurtSprite: {fileID: -1834785888, guid: 03fcaa8980f2f7e4dbe25db6e6ffc143, type: 3}
+  MadDashSprite: {fileID: 1263620052, guid: 5c8fcf625c6cc094bab1b251d81aaea0, type: 3}
 --- !u!114 &217788455370571805
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -140,6 +144,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bullet: 1
   lazer: 0
+  sword: 0
   lazerDmg: 1
   firePoint: {fileID: 217788456347944485}
   bulletPrefab: {fileID: 3948635292518955943, guid: 32edac5996fab144885f6b537cdd2334, type: 3}
@@ -570,7 +575,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8784209321672251627, guid: 356217490debe0c47809838297b9b7de, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 356217490debe0c47809838297b9b7de, type: 3}

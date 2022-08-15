@@ -26,7 +26,7 @@ public class PlayerController : MonoBehaviour, IDamageSource
     public int life = 3;
     //Time Related
     public float timer = 0.0f;
-    public float lastHitSnap = 0.0f;
+    public float lastHitSnap =-2.0f;
     public float lastDashSnap = 0.0f;
 
     //public Rigidbody2D rb;
@@ -57,6 +57,14 @@ public class PlayerController : MonoBehaviour, IDamageSource
     float targetAngle;
     public int curWpn;
     public ShooterController sc;
+
+    //Sprite related
+    public SpriteRenderer spriR;
+    public Sprite BaseSprite;
+    public Sprite HurtSprite;
+    public Sprite MadDashSprite;
+
+
     private void Awake()
     {
         rb = rb is null ? GetComponent<Rigidbody2D>() : rb;
@@ -76,6 +84,7 @@ public class PlayerController : MonoBehaviour, IDamageSource
             canDash = false;
             isDash = true;
             lastDashSnap = GameController.iCont.timer;
+            spriR.sprite = MadDashSprite;
             //MadDash();
         }
         if (isDash && (GameController.iCont.timer - lastDashSnap) < 0.2)
@@ -85,6 +94,7 @@ public class PlayerController : MonoBehaviour, IDamageSource
         else if (isDash && (GameController.iCont.timer - lastDashSnap) > 0.2)
         {
             isDash = false;
+            spriR.sprite = BaseSprite;
         }
 
         if(!isDash && (GameController.iCont.timer - lastDashSnap) > 2.0)
@@ -104,7 +114,11 @@ public class PlayerController : MonoBehaviour, IDamageSource
 
         rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
 
-
+        if (!isDash && (GameController.iCont.timer - lastHitSnap) > 1.0)
+        { 
+        
+            spriR.sprite = BaseSprite;
+        }
         //girar aqui a weapon
         //Debug.Log("Rotation: " + this.transform.localRotation.eulerAngles.z);
         targetAngle = this.transform.localRotation.eulerAngles.z;
@@ -132,13 +146,14 @@ public class PlayerController : MonoBehaviour, IDamageSource
     void OnTriggerEnter2D(Collider2D col)
     {
         Debug.Log(col.name);
-        if (!isDash)
+        if (!isDash )
         {
 
-            if (col.CompareTag("Enemy") || col.CompareTag("ABullet") && (timer - lastHitSnap) > 2.0)
+            if (col.CompareTag("Enemy") || col.CompareTag("ABullet") || col.CompareTag("A") || col.CompareTag("K") || col.CompareTag("M") && (timer - lastHitSnap) > 2.0)
             {
                // Debug.Log("DANO");
                 lastHitSnap = timer;
+                spriR.sprite = HurtSprite;
                 life--;
             }
         }
@@ -217,10 +232,10 @@ public class PlayerController : MonoBehaviour, IDamageSource
 
     public void TakeDamage(int damage, string tag)
     {
-        if (!state.HasFlag(MadDashing))
+        if (!isDash)
         {
 
-            if (tag == "Enemy" || tag == "ABullet" && (timer - lastHitSnap) > 2.0)
+            if (tag == "Enemy" || tag ==  ("A") || tag ==  ("M") || tag ==  ("K") && (timer - lastHitSnap) > 2.0)
             {
                 lastHitSnap = timer;
                life--;

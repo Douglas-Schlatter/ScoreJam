@@ -23,7 +23,7 @@ public class PlayerController : MonoBehaviour, IDamageSource
 
     //Status Effects
     public float moveSpeed = 5f;
-    public float life = 3f;
+    public int life = 3;
     //Time Related
     public float timer = 0.0f;
     public float lastHitSnap = 0.0f;
@@ -113,9 +113,10 @@ public class PlayerController : MonoBehaviour, IDamageSource
         {
 
             if (col.CompareTag("Enemy") || col.CompareTag("ABullet") && (timer - lastHitSnap) > 2.0)
-        {
+            {
+                Debug.Log("DANO");
                 lastHitSnap = timer;
-                GameController.TakeDamage();;
+                life--;
             }
         }
         else if (@state.HasFlag(MadDashing))

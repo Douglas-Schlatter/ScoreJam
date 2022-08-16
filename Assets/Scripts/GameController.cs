@@ -78,7 +78,7 @@ public class GameController : MonoBehaviour
         {
             morto = true;
             holder.GetComponent<Holder>().scoreCopy = score;
-            SceneManager.LoadScene(4);
+            SceneManager.LoadScene(5);
         }
     }
 

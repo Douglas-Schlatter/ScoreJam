@@ -149,7 +149,7 @@ MonoBehaviour:
   sword: 0
   lazerDmg: 1
   firePoint: {fileID: 217788456347944485}
-  bulletPrefab: {fileID: 3948635292518955943, guid: 32edac5996fab144885f6b537cdd2334, type: 3}
+  bulletPrefab: {fileID: 4868783543850951873, guid: cd5146b672b133a49afd82f546703f9c, type: 3}
   lineRender: {fileID: 217788455404795148}
   bulletForce: 20
   ef: {fileID: 5115206266766644760}
@@ -427,7 +427,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 217788456347944482}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.475, z: 0}
+  m_LocalPosition: {x: 0, y: 0.77, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

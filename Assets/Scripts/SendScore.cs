@@ -11,6 +11,13 @@ public class SendScore : MonoBehaviour
     public GameObject holder;
     public TMP_InputField name;
     public TextMeshProUGUI resposta;
+    int LeaderBoardID = 5520;
+    public TMP_Text PlayersNames;
+    public TMP_Text PlayerScores;
+
+
+    bool _nameSubmited = false;
+    bool setuped = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,14 +33,43 @@ public class SendScore : MonoBehaviour
     {
         //name.text;
         Debug.Log("Enviou");
+        //name.text;
+        Debug.Log("Enviou");
+        StartCoroutine(LoginRoutine());
+
+        /*
+         * 
+        if (!setuped)
+        {
+            StartCoroutine(Setup());
+            setuped = true;
+        }
+        else if (_nameSubmited)
+        {
+            StartCoroutine(ScoreRoutine());
+        }
+        */
+        //StartCoroutine(Setup());
+        //StartCoroutine(ScoreRoutine());
+
+        resposta.enabled = true;
 
         resposta.enabled = true;
 
     }
 
+    public IEnumerator Setup()
+    {
+        yield return LoginRoutine();
+    }
+    public IEnumerator ScoreRoutine()
+    {
+        yield return SubmitScoreRoutine();
+        yield return FechTopHighScoresRoutine();
+    }
     public void SetPlayerName()
     {
-        LootLockerSDKManager.SetPlayerName(playerNameInputsField.text,
+        LootLockerSDKManager.SetPlayerName(name.text,
             response =>
             {
                 if (response.success)
@@ -88,7 +124,7 @@ public class SendScore : MonoBehaviour
         LootLockerSDKManager.GetScoreListMain(LeaderBoardID, 10, 0, responseCallback);
         yield return new WaitUntil(() => !done);
     }
-
+    /*
     IEnumerator LoginRoutine()
     {
         bool done = false;
@@ -108,11 +144,35 @@ public class SendScore : MonoBehaviour
         });
         yield return new WaitWhile(() => !done);
     }
+    */
+
+    IEnumerator LoginRoutine()
+    {
+        bool done = false;
+        LootLockerSDKManager.StartGuestSession((response) =>
+        {
+            if (response.success)
+            {
+                Debug.Log("Player was logged in");
+                PlayerPrefs.SetString("PLayerId", response.player_id.ToString());
+                done = true;
+            }
+
+            else
+            {
+                Debug.Log("Could not start session");
+                done = true;
+            }
+        });
+        yield return new WaitWhile(() => done == false);
+    }
+
+
     public IEnumerator SubmitScoreRoutine()
     {
         bool done = false;
         string playerID = PlayerPrefs.GetString("PlayerID");
-        LootLockerSDKManager.SubmitScore(playerID, score: score, leaderboardId: LeaderBoardID,
+        LootLockerSDKManager.SubmitScore(playerID, score: holder.GetComponent<Holder>().scoreCopy, leaderboardId: LeaderBoardID,
             resposne =>
             {
                 if (resposne.success)

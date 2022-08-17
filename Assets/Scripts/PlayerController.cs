@@ -146,16 +146,18 @@ public class PlayerController : MonoBehaviour, IDamageSource
     //AKA Em colis�o fa�a
     void OnTriggerEnter2D(Collider2D col)
     {
-        //Debug.Log(col.name);
+        Debug.Log(col.name);
         if (!isDash && !isSlash)
         {
-
-            if (col.CompareTag("Enemy") || col.CompareTag("ABullet") || col.CompareTag("A") || col.CompareTag("K") || col.CompareTag("M") && (timer - lastHitSnap) > 2.0)
+            if((timer - lastHitSnap) > 2.0)
             {
-               // Debug.Log("DANO");
-                lastHitSnap = timer;
-                spriR.sprite = HurtSprite;
-                life--;
+                if (col.CompareTag("Enemy") || col.CompareTag("ABullet") || col.CompareTag("A") || col.CompareTag("K") || col.CompareTag("M"))
+                {
+                    Debug.Log("DANO");
+                    lastHitSnap = timer;
+                    spriR.sprite = HurtSprite;
+                    life--;
+                }
             }
         }
         else if (isDash)

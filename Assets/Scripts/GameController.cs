@@ -27,6 +27,7 @@ public class GameController : MonoBehaviour
     public int multplier;
     public float testHit;
     public TextMeshProUGUI ScoreValue;
+    public TextMeshProUGUI mulValue;
 
     //Time Related
     public float timer = 0.0f;
@@ -103,23 +104,23 @@ public class GameController : MonoBehaviour
             {
 
                 case 1:
-                    SpawnByTime(6, 2.0);
+                    SpawnByTime(6, 2.0,2);
                     break;
                 case 2:
-                    SpawnByTime(7,1.8);
+                    SpawnByTime(7,1.7,2);
                     break;
                 case 4:
-                    SpawnByTime(8,1.5);
+                    SpawnByTime(8,1.3,2);
                     break;
                 case 6:
-                    SpawnByTime(9,1.0);
+                    SpawnByTime(9,1.0,3);
                     break;
                 case 10:
-                    SpawnByTime(10,0.5);
+                    SpawnByTime(10,0.5,3);
                     break;
 
                 default:
-                    SpawnByTime(6, 2.0);
+                    SpawnByTime(6, 2.0,2);
                     break;
             }
         }
@@ -141,10 +142,11 @@ public class GameController : MonoBehaviour
     }
     private void LateUpdate()
     {
-       ScoreValue.text = score.ToString();
+        mulValue.text = multplier.ToString();
+        ScoreValue.text = score.ToString();
     }
 
-    void SpawnByTime(int max,double dif)
+    void SpawnByTime(int max,double dif,int hp)
     {
         if (max > sEnemies.Count)
         {
@@ -155,7 +157,7 @@ public class GameController : MonoBehaviour
                 GameObject test = (GameObject)Instantiate(enemies[rEnem], spawanLocations[rSpwan].transform.position, spawanLocations[rSpwan].transform.rotation);
                 test.GetComponent<AIDestinationSetter>().target = player.transform;
                 //st.TryGetComponent(Pathfinding.AIDestinationSetter)
-                 
+                test.GetComponent<BaseEnemyController>().health = hp;
                 sEnemies.Add(test);
                 lastSpwan = timer;
             }

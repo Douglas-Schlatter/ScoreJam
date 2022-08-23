@@ -22,7 +22,7 @@ public class PlayerController : MonoBehaviour, IDamageSource
     public PlayerState PlayerStt { get; } = new();
 
     //Status Effects
-    public float moveSpeed = 5f;
+    public float moveSpeed = 7f;
     public int life = 3;
     //Time Related
     public float timer = 0.0f;

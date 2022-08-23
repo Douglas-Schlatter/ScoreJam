@@ -107,7 +107,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4e870b2f20ae9746961ea0cab999d9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
+  moveSpeed: 7
   life: 3
   timer: 0
   lastHitSnap: 0
@@ -119,7 +119,7 @@ MonoBehaviour:
   DashDamage: 2
   CurrentEvent: 
   CurrentState: 
-  DashMod: 125
+  DashMod: 250
   wps:
   - {fileID: 2983027119326124942}
   - {fileID: 13666012813682050}

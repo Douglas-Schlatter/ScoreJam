@@ -17,6 +17,7 @@ public class GameController : MonoBehaviour
     public SpriteRenderer Vida1;
     public SpriteRenderer Vida2;
     public SpriteRenderer Vida3;
+    public Sprite CoraçãoCheio;
     public Sprite CoraçãoVazio;
     public PlayerController pc;
     public AstarPath aPath;
@@ -67,9 +68,15 @@ public class GameController : MonoBehaviour
     {
         //print(vida);
         vida = pc.life;
+        if( vida == 3)
+        {
+            Vida3.sprite = CoraçãoCheio;
+            Vida2.sprite = CoraçãoCheio;
+        }
         if (vida == 2)
         {
             Vida3.sprite = CoraçãoVazio;
+            Vida2.sprite = CoraçãoCheio;
         }
         else if (vida == 1)
         {
@@ -96,23 +103,23 @@ public class GameController : MonoBehaviour
             {
 
                 case 1:
-                    SpawnByTime(6);
+                    SpawnByTime(6, 2.0);
                     break;
                 case 2:
-                    SpawnByTime(7);
+                    SpawnByTime(7,1.8);
                     break;
                 case 4:
-                    SpawnByTime(8);
+                    SpawnByTime(8,1.5);
                     break;
                 case 6:
-                    SpawnByTime(9);
+                    SpawnByTime(9,1.0);
                     break;
                 case 10:
-                    SpawnByTime(10);
+                    SpawnByTime(10,0.5);
                     break;
 
                 default:
-                    SpawnByTime(6);
+                    SpawnByTime(6, 2.0);
                     break;
             }
         }
@@ -137,11 +144,11 @@ public class GameController : MonoBehaviour
        ScoreValue.text = score.ToString();
     }
 
-    void SpawnByTime(int max)
+    void SpawnByTime(int max,double dif)
     {
         if (max > sEnemies.Count)
         {
-            if ((timer - lastSpwan) > 2.0)
+            if ((timer - lastSpwan) > dif)
             {
                 rSpwan = Random.Range(0, spawanLocations.Length);
                 rEnem = Random.Range(0, enemies.Length);

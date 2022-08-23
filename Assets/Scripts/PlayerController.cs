@@ -50,7 +50,7 @@ public class PlayerController : MonoBehaviour, IDamageSource
     [SerializeField]
     string CurrentState;
 
-    public float DashMod = 500f;
+    public float DashMod = 250f;
 
     //Weapon Related
     public GameObject[] wps;
@@ -102,7 +102,8 @@ public class PlayerController : MonoBehaviour, IDamageSource
         {
             canDash = true;
         }
-
+        float angle = Mathf.Atan2(LookDir.y, LookDir.x) * Mathf.Rad2Deg - 90f;
+        rb.rotation = angle;
 
     }
     void FixedUpdate()
@@ -110,8 +111,8 @@ public class PlayerController : MonoBehaviour, IDamageSource
 
         timer += Time.deltaTime;
        
-        float angle = Mathf.Atan2(LookDir.y, LookDir.x) * Mathf.Rad2Deg - 90f;
-        rb.rotation = angle;
+        //float angle = Mathf.Atan2(LookDir.y, LookDir.x) * Mathf.Rad2Deg - 90f;
+        //rb.rotation = angle;
 
         rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
 
@@ -164,7 +165,13 @@ public class PlayerController : MonoBehaviour, IDamageSource
         {
             lastHitSnap = timer;
             DoDamage(col.gameObject, "Enemy", DashDamage);
-
+            if (life < 3)
+            {
+                if(Random.Range(0,6) == 5)
+                {
+                    life++;
+                } 
+            }
             if (col.CompareTag("A"))
             {
                 DoDamage(col.gameObject, "A", DashDamage);
